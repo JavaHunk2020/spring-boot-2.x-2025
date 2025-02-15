@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import cp.spring.dao.DogRepository;
 import cp.spring.entity.Dog;
+import cp.spring.exception.DogNotFoundException;
 import cp.spring.rest.dto.DogDTO;
 import cp.spring.service.DogService;
 
@@ -61,7 +62,7 @@ public class DogServiceImpl implements DogService{
 	public DogDTO findByName(String name) {
 		Optional<Dog> optional=dogRepository.findById(name);
 		if(optional.isEmpty()) {
-			throw new RuntimeException("Sorry data is not found name = "+name);
+			throw new DogNotFoundException("Sorry data is not found name = "+name);
 		}
 		Dog d=optional.get();
 		DogDTO dogDTO=new DogDTO();

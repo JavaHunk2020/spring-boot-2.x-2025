@@ -34,7 +34,7 @@ public class DogController {
 	//@PathVariable annotation is used read input data as part of URI
 	@DeleteMapping("/dogs/{name}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public Map<String,Object> DeleteeDog(@PathVariable String name) {
+	public Map<String,Object> deleteeDog(@PathVariable String name) {
 		System.out.println("###########DELETING DOG WHIHC DID IS = "+name);
 		dogService.deleteById(name);
 		return Map.of("message","Dog is deleted","code",200);
