@@ -53,6 +53,21 @@ public class AuthController {
 						.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
 				
 			return new ResponseEntity<>(Map.of("message", "Cool! username and password are correct!","Authorization",jwtToken), HttpStatus.OK);
+		}else if (input.get("username").equals("jack") && input.get("password").equals("jill")) {
+		       GrantedAuthority authority2 = new SimpleGrantedAuthority("CUSTOMER");
+		       List<GrantedAuthority> roleList=List.of(authority2);
+		    	Map<String, Object> claims = new HashMap<>();
+				claims.put("scopes", roleList.stream().map(ga->ga.getAuthority()).collect(Collectors.toList()));
+				claims.put("company", "AbcTech");
+				String jwtToken= 
+						Jwts.builder()
+						.setSubject((input.get("username")))
+						.addClaims(claims)
+						.setIssuedAt(new Date())
+						.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+						.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
+				
+			return new ResponseEntity<>(Map.of("message", "Cool! username and password are correct!","Authorization",jwtToken), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(Map.of("message", "Sorry! username and password are not correct!"),
 					HttpStatus.UNAUTHORIZED);

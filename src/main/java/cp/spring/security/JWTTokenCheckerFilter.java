@@ -79,6 +79,7 @@ public class JWTTokenCheckerFilter extends OncePerRequestFilter {
 					// authentication.setDetails(new
 					// WebAuthenticationDetailsSource().buildDetails(request));
 					// SecutiryContextHolder
+					//THIS LINE IS MAGIC
 					SecurityContextHolder.getContext().setAuthentication(auth);
 				}
 			}
