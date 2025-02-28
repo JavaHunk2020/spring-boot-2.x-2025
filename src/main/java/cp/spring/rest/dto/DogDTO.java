@@ -5,6 +5,15 @@ public class DogDTO {
 	private String name;
 	private String color;
 	private int tail;
+	
+	public DogDTO() {}
+
+	public DogDTO(String name, String color, int tail) {
+		super();
+		this.name = name;
+		this.color = color;
+		this.tail = tail;
+	}
 
 	public String getName() {
 		return name;

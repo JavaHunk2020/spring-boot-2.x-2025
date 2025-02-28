@@ -41,14 +41,15 @@ public class AuthController {
 		       List<GrantedAuthority> roleList=List.of(authority1,authority2);
 				
 		    	Map<String, Object> claims = new HashMap<>();
-				claims.put("scopes", roleList.stream().map(ga->ga.getAuthority()).collect(Collectors.toList()));
+				claims.put("scopes", roleList.stream().map(ga->ga.getAuthority())
+						.collect(Collectors.toList()));
 				claims.put("company", "AbcTech");
 
 				String jwtToken= 
 						Jwts.builder()
+						.setIssuedAt(new Date())
 						.setSubject((input.get("username")))
 						.addClaims(claims)
-						.setIssuedAt(new Date())
 						.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
 						.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
 				
